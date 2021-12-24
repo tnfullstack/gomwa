@@ -39,16 +39,14 @@ func addValues(a, b int) int {
 
 // DivideValues return results of to a web page
 func Divide(w http.ResponseWriter, r *http.Request) {
-	divResult, err := divideValues(0, 3.0)
+	divResult, err := divideValues(9.0, 0)
 	if err != nil {
-		log.Println(err)
+		fmt.Fprintf(w, "Divide page, 9 / 3 is %.2f, error: %s\n", divResult, err)
+		return
 	}
 
-	n, err1 := fmt.Fprintf(w, "Divide page, 9 / 3 is %.2f", divResult)
-	if err1 != nil {
-		log.Println(err)
-	}
-	log.Println("Divide page, number of bytes written", n)
+	fmt.Fprintf(w, "Divide page, 9 / 3 is %.2f\n", divResult)
+
 }
 
 // divideValues calculate two numbers, return result, and error
