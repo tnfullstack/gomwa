@@ -11,7 +11,8 @@
 
 body {
      font-family:Arial, Helvetica, sans-serif;
-     color: #6e6e6e;
+     font-size: 1.3rem;
+     color: #2c2c2c;
      letter-spacing: .03rem;
 }
 
@@ -30,14 +31,17 @@ h1 {
 
 .navbar-logo {
      display: flex;
-
-     /* justify-content: flex-start; */
-     /* width: 10rem; */
      align-items: center;
      margin-left: 4rem
 }
 .navbar-logo-text {
      font-size: 3rem;
+     color: #800080
+}
+
+.navbar-logo-text a {
+     text-decoration: none;
+     text-transform: none;
 }
 
 .navbar-menu {
@@ -50,10 +54,11 @@ h1 {
 .navbar-menu-links {
      display: inline;
      margin-left: 2rem;
-     
+     color: #800080;
 }
 
 .navbar-menu-links a {
      text-decoration: none;
+     text-transform: none;
 }
 
