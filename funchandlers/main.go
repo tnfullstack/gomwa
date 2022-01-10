@@ -37,7 +37,7 @@ func addValues(a, b int) int {
 	return a + b
 }
 
-// DivideValues return results of to a web page
+// Divide DivideValues return results of to a web page
 func Divide(w http.ResponseWriter, r *http.Request) {
 	divResult, err := divideValues(9.0, 0)
 	if err != nil {
