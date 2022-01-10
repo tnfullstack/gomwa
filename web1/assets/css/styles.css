@@ -10,10 +10,18 @@
  }
 
 body {
+     display: flex;
+     justify-content: center;
      font-family:Arial, Helvetica, sans-serif;
      font-size: 1.3rem;
      color: #2c2c2c;
      letter-spacing: .03rem;
+     line-height: 1.8rem;
+}
+
+.container {
+     width: 80%;
+     display: flex;
 }
 
 h1 {
@@ -32,7 +40,6 @@ h1 {
 .navbar-logo {
      display: flex;
      align-items: center;
-     margin-left: 4rem
 }
 .navbar-logo-text {
      font-size: 3rem;
@@ -47,8 +54,6 @@ h1 {
 .navbar-menu {
      display: flex;
      align-items: center;
-     margin-right: 4rem;
-
 } 
 
 .navbar-menu-links {
