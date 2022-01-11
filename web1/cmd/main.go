@@ -3,11 +3,10 @@ package main
 
 import (
 	"fmt"
+	"github.com/gorilla/mux"
 	"log"
 	"net/http"
-
-	"github.com/gorilla/mux"
-	"github.com/tvn9/gomwa/web1/pkg/handlers"
+	"web1/pkg/handlers"
 )
 
 const (
