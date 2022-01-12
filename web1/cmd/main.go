@@ -3,10 +3,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 	"web1/pkg/handlers"
+
+	"github.com/gorilla/mux"
 )
 
 const (
@@ -17,7 +18,6 @@ const (
 func main() {
 	// Define a gorilla mux router
 	r := mux.NewRouter()
-
 	// Define a http file server to serve static css files (this block use without mux)
 	// fs := http.FileServer(http.Dir("../assets"))
 	// http.Handle("/assets/", http.StripPrefix("/assets", fs))
@@ -31,9 +31,7 @@ func main() {
 	r.HandleFunc("/contacts", handlers.Contacts)
 	r.HandleFunc("/about", handlers.About)
 	r.HandleFunc("/signup", handlers.Signup)
-
 	http.Handle("/", r)
-
 	fmt.Println("Starting web app on port", webPort)
 
 	// Listen to web server request and serve the pages
