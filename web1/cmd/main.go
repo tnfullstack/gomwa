@@ -18,11 +18,12 @@ const (
 func main() {
 	// Define a gorilla mux router
 	r := mux.NewRouter()
+	
 	// Define a http file server to serve static css files (this block use without mux)
 	// fs := http.FileServer(http.Dir("../assets"))
 	// http.Handle("/assets/", http.StripPrefix("/assets", fs))
-
 	// This will serve files under http://localhost:8000/static/<filename> (use with mux.NewServer)
+
 	r.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("../assets"))))
 
 	// HandleFunc listen to web url requests
