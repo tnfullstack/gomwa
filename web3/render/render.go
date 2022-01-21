@@ -2,6 +2,7 @@ package render
 
 import (
 	"bytes"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -9,7 +10,7 @@ import (
 )
 
 // functions
-var functions = template.FuncMap{}
+// var functions = template.FuncMap{}
 
 // renderTemplates
 func RenderTemplates(w http.ResponseWriter, str string) {
@@ -40,7 +41,8 @@ func RenderTemplates(w http.ResponseWriter, str string) {
 func CreateTmplCache() (map[string]*template.Template, error) {
 	tmplCache := map[string]*template.Template{}
 
-	pages, err := filepath.Glob("./templates/*.page.html")
+	// pages, err := filepath.Glob("./templates/*.page.html")
+	pages, err := filepath.Glob("./templates/*.html")
 	if err != nil {
 		return tmplCache, err
 	}
@@ -49,19 +51,20 @@ func CreateTmplCache() (map[string]*template.Template, error) {
 	for _, p := range pages {
 		name := filepath.Base(p)
 		// fmt.Println(p)
-		ts, err := template.New(name).Funcs(functions).ParseFiles(p)
+		// ts, err := template.New(name).Funcs(functions).ParseFiles(p)
+		ts, err := template.New(name).ParseFiles(p)
 		if err != nil {
 			return tmplCache, err
 		}
 		//fmt.Println(ts)
 
-		matches, err := filepath.Glob("./templates/*.layout.html")
-		if err != nil {
-			return tmplCache, err
-		}
-		// fmt.Println(matches)
+		// matches, err := filepath.Glob("./templates/*.layout.html")
+		// if err != nil {
+		// 	return tmplCache, err
+		// }
+		// // fmt.Println(matches)
 
-		if len(matches) > 0 {
+		if len(pages) > 0 {
 			ts, err = ts.ParseGlob("./templates/*.layout.html")
 			// fmt.Println(ts)
 			if err != nil {
@@ -71,6 +74,6 @@ func CreateTmplCache() (map[string]*template.Template, error) {
 
 		tmplCache[name] = ts
 	}
-	// fmt.Println("From CreateTmplCache func:", tmplCache)
+	fmt.Println("From CreateTmplCache func:", tmplCache)
 	return tmplCache, nil
 }
