@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 
 	"github.com/tvn9/gomwa/web3/config"
+	"github.com/tvn9/gomwa/web3/models"
 )
 
 // functions
@@ -23,7 +24,7 @@ func NewTemplates(a *config.AppConfig) {
 }
 
 // renderTemplates
-func RenderTemplates(w http.ResponseWriter, str string) {
+func RenderTemplates(w http.ResponseWriter, str string, td *models.TemplateData) {
 	var tc map[string]*template.Template
 	// Get templates cache from AppConfig struct
 	if appCfg.UseCache {
@@ -39,7 +40,7 @@ func RenderTemplates(w http.ResponseWriter, str string) {
 
 	buf := new(bytes.Buffer)
 
-	_ = t.Execute(buf, nil)
+	_ = t.Execute(buf, td)
 
 	_, err := buf.WriteTo(w)
 	if err != nil {

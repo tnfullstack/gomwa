@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/tvn9/gomwa/web3/config"
+	"github.com/tvn9/gomwa/web3/models"
 	"github.com/tvn9/gomwa/web3/renders"
 )
 
@@ -29,10 +30,15 @@ func NewHandler(r *Repository) {
 
 // Home
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
-	renders.RenderTemplates(w, "home.html")
+	// passing data from to template
+	stringMap := make(map[string]string)
+	stringMap["test"] = "Hello World!"
+	renders.RenderTemplates(w, "home.html", &models.TemplateData{
+		StrMap: stringMap,
+	})
 }
 
 // About
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
-	renders.RenderTemplates(w, "about.html")
+	renders.RenderTemplates(w, "about.html", &models.TemplateData{})
 }
