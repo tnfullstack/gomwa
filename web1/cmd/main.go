@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"web1/pkg/handlers"
 
 	"github.com/gorilla/mux"
+	"github.com/tvn9/gomwa/web1/pkg/handlers"
 )
 
 const (
@@ -18,7 +18,7 @@ const (
 func main() {
 	// Define a gorilla mux router
 	r := mux.NewRouter()
-	
+
 	// Define a http file server to serve static css files (this block use without mux)
 	// fs := http.FileServer(http.Dir("../assets"))
 	// http.Handle("/assets/", http.StripPrefix("/assets", fs))
