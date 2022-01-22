@@ -30,12 +30,16 @@ func main() {
 	fs := http.FileServer(http.Dir("assets/"))
 	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
 
-	http.HandleFunc("/", handlers.Repo.Home)
-	http.HandleFunc("/about", handlers.Repo.About)
+	// http.HandleFunc("/", handlers.Repo.Home)
+	// http.HandleFunc("/about", handlers.Repo.About)
 
-	srv := http.Server{
-		Addr: ":8080",
+	srv := &http.Server{
+		Addr:    ":8080",
+		Handler: routes(&appCfg),
 	}
 
-	srv.ListenAndServe()
+	err = srv.ListenAndServe()
+	if err != nil {
+		log.Fatal(err)
+	}
 }
