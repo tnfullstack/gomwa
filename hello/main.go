@@ -1,4 +1,4 @@
-// Hello Gopher
+// Testing Go Web Server
 package main
 
 import (
