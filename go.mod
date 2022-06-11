@@ -1,3 +1,3 @@
-module githum.com/tvn/gomwa
+module github.com/tvn9/gomwa
 
 go 1.18

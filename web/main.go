@@ -1,16 +1,16 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
-
-	"githum.com/tvn/gomwa/handlers"
 )
 
-func main() {
-	http.HandleFunc("/", handlers.Home)
-	http.HandleFunc("about", handlers.About)
-	http.HandleFunc("contact", handlers.Contact)
+const portNum = ":8080"
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+func main() {
+	mux := routes()
+
+	fmt.Printf("Starting server on port %s\n", portNum)
+	log.Fatal(http.ListenAndServe(portNum, mux))
 }

@@ -6,26 +6,26 @@ import (
 	"net/http"
 )
 
-var templates *template.Template
+var tmpls *template.Template
 
 func init() {
-	templates = template.Must(template.ParseGlob("templates/*.html"))
+	tmpls = template.Must(template.ParseGlob("../templates/*.html"))
 }
 
 func Home(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "home.page.html")
+	renderTemplate(w, "home.html")
 }
 
 func About(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "about.page.html")
+	renderTemplate(w, "about.html")
 }
 
 func Contact(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "contact.page.html")
+	renderTemplate(w, "contact.html")
 }
 
 func renderTemplate(w http.ResponseWriter, tmpl string) {
-	err := templates.ExecuteTemplate(w, tmpl, nil)
+	err := tmpls.ExecuteTemplate(w, tmpl, nil)
 	if err != nil {
 		fmt.Println("error parsing template:", err)
 		return
