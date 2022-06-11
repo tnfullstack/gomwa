@@ -30,14 +30,14 @@ func addNums(x, y int) int {
 	return x + y
 }
 
-func main() {
+const PortNum = ":8080"
 
-	port := ":8080"
+func main() {
 
 	http.HandleFunc("/", Home)
 	http.HandleFunc("/about", About)
 	http.HandleFunc("/add", Math)
 
-	fmt.Println("Starting Server at port", port)
-	http.ListenAndServe(port, nil)
+	fmt.Println("Starting Server on port", PortNum)
+	http.ListenAndServe(PortNum, nil)
 }
