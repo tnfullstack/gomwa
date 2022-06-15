@@ -14,6 +14,5 @@ func main() {
 }
 
 func updateValueByPointer(s *string) {
-	newVal := s
-	*newVal = "Red"
+	*s = "Red"
 }
