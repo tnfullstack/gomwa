@@ -61,12 +61,12 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 		if err != nil {
 			return myCache, err
 		}
-		matches, err := filepath.Glob("templates/base.tmpl")
+		matches, err := filepath.Glob("templates/base.html")
 		if err != nil {
 			return myCache, err
 		}
 		if len(matches) > 0 {
-			ts, err = ts.ParseGlob("templates/base.tmpl")
+			ts, err = ts.ParseGlob("templates/base.html")
 			if err != nil {
 				return myCache, err
 			}
