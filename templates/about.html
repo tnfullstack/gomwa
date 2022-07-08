@@ -5,5 +5,13 @@
    <p>more text</p>
    <p>more text 2</p>
    <p>This came from the template: {{index .StrMap "test"}}</p>
+
+   <p>
+      {{if ne (index .StrMap "remote_ip") ""}}
+         Remote IP address is {{index .StrMap "remote_ip"}}
+      {{else}}
+         Go to <a href="/">Home page</a> to set store ipaddr.
+      {{end}}
+   </p>
 {{end}}
 
