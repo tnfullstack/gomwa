@@ -1,3 +1,3 @@
-module github.com/tvn9/gomwa
+module gomwa
 
-go 1.20
+go 1.21.5

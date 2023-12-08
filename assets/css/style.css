@@ -1,0 +1,19 @@
+html {
+   box-sizing: border-box;
+}
+
+body {
+   margin: 0;
+   padding: 0;
+   font-family: 'Poppins', sans-serif;
+}
+
+.container {
+   width: 80%;
+   margin: auto;
+
+}
+
+h1 {
+   color: red;
+}
