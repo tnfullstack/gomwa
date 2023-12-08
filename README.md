@@ -1,2 +1,2 @@
-# Go Modern Web App
+# Modern Web App with Go
 Building Modern Web Application in Go
