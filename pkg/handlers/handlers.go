@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/tvn9/gomwa/pkg/config"
+	"github.com/tvn9/gomwa/pkg/models"
 	"github.com/tvn9/gomwa/pkg/render"
 )
 
@@ -24,13 +25,15 @@ func NewHandlers(r *Repository) {
 }
 
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "index.html")
+	render.RenderTemplate(w, "index.html", &models.AppData{})
 }
 
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "about.html")
+	stringMap := map[string]string{}
+	stringMap["test"] = "Hello, there!, I am here!"
+	render.RenderTemplate(w, "about.html", &models.AppData{StringMap: stringMap})
 }
 
 func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "contact.html")
+	render.RenderTemplate(w, "contact.html", &models.AppData{})
 }

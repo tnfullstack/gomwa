@@ -3,7 +3,9 @@ package main
 import (
 	"log"
 	"net/http"
+	"time"
 
+	"github.com/alexedwards/scs/v2"
 	"github.com/tvn9/gomwa/pkg/config"
 	"github.com/tvn9/gomwa/pkg/handlers"
 	"github.com/tvn9/gomwa/pkg/render"
@@ -11,8 +13,20 @@ import (
 
 const port = ":8080"
 
+var app config.AppConfig
+var session *scs.SessionManager
+
 func main() {
-	var app config.AppConfig
+	// change this to true when in production
+	app.InProduction = false
+
+	session = scs.New()
+	session.Lifetime = 24 * time.Hour
+	session.Cookie.Persist = true
+	session.Cookie.SameSite = http.SameSiteLaxMode
+	session.Cookie.Secure = app.InProduction
+
+	app.Session = session
 
 	tc, err := render.CreateTemplateCache()
 	if err != nil {
@@ -27,12 +41,10 @@ func main() {
 
 	render.NewTemplates(&app)
 
-	http.HandleFunc("/", handlers.Repo.Home)
-	http.HandleFunc("/about", handlers.Repo.About)
-	http.HandleFunc("/contact", handlers.Repo.Contact)
-
 	log.Println("Starting server on port", port)
-	if err := http.ListenAndServe(port, nil); err != nil {
-		log.Fatalf("fail to start server %v\n", err)
+	srv := &http.Server{
+		Addr:    port,
+		Handler: routes(&app),
 	}
+	log.Fatal(srv.ListenAndServe())
 }

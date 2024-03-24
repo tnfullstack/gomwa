@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 
 	"github.com/tvn9/gomwa/pkg/config"
+	"github.com/tvn9/gomwa/pkg/models"
 )
 
 var app *config.AppConfig
@@ -16,8 +17,14 @@ func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
+func AddDefaultData(td *models.AppData) *models.AppData {
+
+	return td
+}
+
 // RenderTemplate renders a template
-func RenderTemplate(w http.ResponseWriter, tmpl string) {
+func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.AppData) {
+
 	var tc map[string]*template.Template
 	if app.UseCache {
 		log.Println("Using templates cache.")
@@ -39,7 +46,9 @@ func RenderTemplate(w http.ResponseWriter, tmpl string) {
 
 	buf := new(bytes.Buffer)
 
-	if err := t.Execute(buf, nil); err != nil {
+	td = AddDefaultData(td)
+
+	if err := t.Execute(buf, td); err != nil {
 		log.Println(err)
 	}
 
@@ -83,6 +92,8 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 	}
 	return tCache, nil
 }
+
+// Below is code written using basic cache concept, the above is the improve version.
 
 /*
 var tc = make(map[string]*template.Template)
