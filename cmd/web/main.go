@@ -1,21 +1,38 @@
 package main
 
 import (
-	"fmt"
-	"gomwa/pkg/handlers"
-	"gomwa/pkg/util"
 	"log"
 	"net/http"
+
+	"github.com/tvn9/gomwa/pkg/config"
+	"github.com/tvn9/gomwa/pkg/handlers"
+	"github.com/tvn9/gomwa/pkg/render"
 )
 
+const port = ":8080"
+
 func main() {
-	port := ":8000"
+	var app config.AppConfig
 
-	util.LocalAssets("assets")
+	tc, err := render.CreateTemplateCache()
+	if err != nil {
+		log.Fatalf("connot create template cache. %v\n", err)
+	}
 
-	http.HandleFunc("/", handlers.Home)
-	http.HandleFunc("/about", handlers.About)
+	app.TemplateCache = tc
+	app.UseCache = true
 
-	fmt.Printf("Starting application on port %s", port)
-	log.Fatal(http.ListenAndServe(port, nil))
+	repo := handlers.NewRepo(&app)
+	handlers.NewHandlers(repo)
+
+	render.NewTemplates(&app)
+
+	http.HandleFunc("/", handlers.Repo.Home)
+	http.HandleFunc("/about", handlers.Repo.About)
+	http.HandleFunc("/contact", handlers.Repo.Contact)
+
+	log.Println("Starting server on port", port)
+	if err := http.ListenAndServe(port, nil); err != nil {
+		log.Fatalf("fail to start server %v\n", err)
+	}
 }
